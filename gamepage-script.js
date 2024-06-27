@@ -47,8 +47,15 @@ const spawnNewButton = () => {
     buttonCreation.type = "button";
     buttonCreation.value = "Next";
     buttonCreation.id = "progressor";
-    document.getElementById("new-button").appendChild(buttonCreation);
+    buttonCreation.addEventListener('click', nextClick);
+    setTimeout(() => {document.getElementById("new-button").appendChild(buttonCreation);}, 10500)
 }
 
-
 //make a function for the "next" button to clear both spans and then count up a progressor of some kind to proceed with the dialogue.
+const nextClick = () => {
+    const scenicWriter = document.getElementById("scenic-writer");
+    const gameWriter = document.getElementById("game-writer");
+    gameWriter.textContent = "";
+    scenicWriter.textContent = "";
+    progressor += 1;
+}
