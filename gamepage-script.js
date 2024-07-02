@@ -1,4 +1,5 @@
 
+//if i make a save system, just have it load by assigning a progressor value to resume story.
 
 //initializes the progressor, which controls the story/gameplay by counting each time the Next button is clicked
 let progressor = 0;
@@ -54,14 +55,14 @@ const gameTextInitiation = () => {
     }
 }
 
-//spawns a new button that says "Next"
-const spawnNewButton = () => {
+//spawns a new button that says "[display]" after a [timer]
+const spawnNewButton = (timer, display) => {
     const buttonCreation = document.createElement("input");
     buttonCreation.type = "button";
-    buttonCreation.value = "Next";
+    buttonCreation.value = display;
     buttonCreation.id = "progressor";
     buttonCreation.addEventListener('click', nextClick);
-    setTimeout(() => {document.getElementById("new-button").appendChild(buttonCreation);}, 7700)
+    setTimeout(() => {document.getElementById("new-button").appendChild(buttonCreation);}, timer)
 }
 
 //make a function for the "next" button to clear both spans and then count up a progressor of some kind to proceed with the dialogue. then removes the "next" button.
@@ -73,5 +74,45 @@ const nextClick = () => {
     progressor += 1;
     const buttonCreation = document.getElementById("progressor");
     buttonCreation.remove();
+    sceneSelector(progressor);
 }
 
+//Selects a scene to play based on the current progressor value.
+const sceneSelector = (progressorVal) => {
+    if (progressorVal === 1) {
+        sceneOne();
+    } else if (progressorVal === 2) {
+        sceneTwo();
+    } else if (progressorVal === 3) {
+        sceneThree();
+    }
+}
+
+//SCENE ONE:
+const sceneOne = () => {
+    const scenicWriter = document.getElementById("scenic-writer");
+    const gameWriter = document.getElementById("game-writer");
+    fastTypeEffect(scenicWriter, `You take a few steps forwards before a strange voice cuts through the silence...`);
+    setTimeout(() => {fastTypeEffect(gameWriter, `"Come over here or the guards will see you." says the voice from another empty cell...`)}, 3750);
+    spawnNewButton(8100, "Go to the Voice");
+}
+
+//SCENE TWO:
+const sceneTwo = () => {
+    const scenicWriter = document.getElementById("scenic-writer");
+    const gameWriter = document.getElementById("game-writer");
+    const narrImg = document.getElementById("narr-img");
+    narrImg.src = "images/narrator-1.jpg";
+    fastTypeEffect(scenicWriter, `"Hey buddy..."`);
+    setTimeout(() => {fastTypeEffect(gameWriter, `"The guards are gonna be on patrol for another few hours. Let's just pass the time here until they leave..."`)}, 2000);
+    spawnNewButton(7400, "Uh, Sure")
+}
+
+//SCENE THREE:
+const sceneThree = () => {
+    const scenicWriter = document.getElementById("scenic-writer");
+    const gameWriter = document.getElementById("game-writer");
+    fastTypeEffect(scenicWriter, `"Oh, really? I didn't think you'd actually want to hang out with me..."`);
+    setTimeout(() => {fastTypeEffect(gameWriter, `"Well I honestly don't have much to do...how about some blackjack?"`)}, 3500);
+    spawnNewButton(7300, "Okay, Deal 'Em")
+}
