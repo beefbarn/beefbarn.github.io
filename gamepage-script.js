@@ -37,7 +37,11 @@ const fastTypeEffect = (element, text, i = 0) => {
     setTimeout(() => fastTypeEffect(element, text, i + 1), 40);
 }
 
-
+//automatically determines the time it takes to write a statement with the fastTypeEffect()
+const typeTimer = (message) => {
+    const theTime = 40 * message.length;
+    return theTime;
+}
 
 const scenicText = document.querySelector("#scenic-text");
 const gameText = document.querySelector("#game-text");
@@ -103,8 +107,10 @@ const sceneSelector = (progressorVal) => {
 const sceneOne = () => {
     const scenicWriter = document.getElementById("scenic-writer");
     const gameWriter = document.getElementById("game-writer");
-    fastTypeEffect(scenicWriter, `You take a few steps forwards before a strange voice cuts through the silence...`);
-    setTimeout(() => {fastTypeEffect(gameWriter, `"Come over here or the guards will see you." says the voice from another empty cell...`)}, 3750);
+    const scenicMsg = `You take a few steps forwards before a strange voice cuts through the silence...`;
+    const gameMsg = `"Come over here or the guards will see you." says the voice from another empty cell...`;
+    fastTypeEffect(scenicWriter, scenicMsg);
+    setTimeout(() => {fastTypeEffect(gameWriter, gameMsg)}, 3750);
     spawnNewButton(8100, "Go to the Voice");
 }
 
@@ -114,8 +120,10 @@ const sceneTwo = () => {
     const gameWriter = document.getElementById("game-writer");
     const narrImg = document.getElementById("narr-img");
     narrImg.src = "images/narrator-1.jpg";
-    fastTypeEffect(scenicWriter, `"Hey buddy..."`);
-    setTimeout(() => {fastTypeEffect(gameWriter, `"The guards are gonna be on patrol for another few hours. Let's just pass the time here until they leave..."`)}, 2000);
+    const scenicMsg = `"Hey buddy..."`;
+    const gameMsg = `"The guards are gonna be on patrol for another few hours. Let's just pass the time here until they leave..."`;
+    fastTypeEffect(scenicWriter, scenicMsg);
+    setTimeout(() => {fastTypeEffect(gameWriter, gameMsg)}, 2000);
     spawnNewButton(7400, "Uh, Sure")
 }
 
@@ -123,16 +131,9 @@ const sceneTwo = () => {
 const sceneThree = () => {
     const scenicWriter = document.getElementById("scenic-writer");
     const gameWriter = document.getElementById("game-writer");
-    const message = `"Oh, really? I didn't think you'd actually want to hang out with me..."`;
-    fastTypeEffect(scenicWriter, message);
-    setTimeout(() => {fastTypeEffect(gameWriter, `"Well I honestly don't have much to do...how about some blackjack?"`)}, typeTimer(message) + 500);
+    const scenicMsg = `"Oh, really? I didn't think you'd actually want to hang out with me..."`;
+    const gameMsg = `"Well I honestly don't have much to do...how about some blackjack?"`
+    fastTypeEffect(scenicWriter, scenicMsg);
+    setTimeout(() => {fastTypeEffect(gameWriter, gameMsg)}, typeTimer(gameMsg) + 1000);
     spawnNewButton(7300, "Okay, Deal 'Em")
-}
-
-//make a function that reads the length of the array and then sets an automatic timer that adds a [delay] to the time it will take to type.
-
-//automatically determines the time it takes to write a word with the fastTypeEffect()
-const typeTimer = (message) => {
-    const theTime = 40 * message.length;
-    return theTime;
 }
