@@ -1,6 +1,17 @@
 
 //if i make a save system, just have it load by assigning a progressor value to resume story.
 
+/*
+
+///GLOBAL VARS
+/progressor
+/scenicText
+/gameText
+/scenicInitShutdown
+/gameInitShutdown
+
+*/
+
 //initializes the progressor, which controls the story/gameplay by counting each time the Next button is clicked
 let progressor = 0;
 
@@ -112,7 +123,16 @@ const sceneTwo = () => {
 const sceneThree = () => {
     const scenicWriter = document.getElementById("scenic-writer");
     const gameWriter = document.getElementById("game-writer");
-    fastTypeEffect(scenicWriter, `"Oh, really? I didn't think you'd actually want to hang out with me..."`);
-    setTimeout(() => {fastTypeEffect(gameWriter, `"Well I honestly don't have much to do...how about some blackjack?"`)}, 3500);
+    const message = `"Oh, really? I didn't think you'd actually want to hang out with me..."`;
+    fastTypeEffect(scenicWriter, message);
+    setTimeout(() => {fastTypeEffect(gameWriter, `"Well I honestly don't have much to do...how about some blackjack?"`)}, typeTimer(message) + 500);
     spawnNewButton(7300, "Okay, Deal 'Em")
+}
+
+//make a function that reads the length of the array and then sets an automatic timer that adds a [delay] to the time it will take to type.
+
+//automatically determines the time it takes to write a word with the fastTypeEffect()
+const typeTimer = (message) => {
+    const theTime = 40 * message.length;
+    return theTime;
 }
